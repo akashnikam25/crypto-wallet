@@ -1,0 +1,63 @@
+// import { mnemonicToSeedSync } from "bip39";
+// import { HDNodeWallet } from "ethers";
+// import { derivePath } from "ed25519-hd-key";
+// import { Keypair } from "@solana/web3.js";
+// import bs58 from 'bs58';
+// import nacl from "tweetnacl";
+
+//   interface Account  {
+//         name: string;
+//         publicAddress: string;
+//         privateAddress: string;
+//     }
+
+// export let GetEthAndSolAccounts = (network:string): Account[]=>{
+//     const accounts: Account[] = [];
+
+//     const mnemonic = localStorage.getItem("seedPharse") || ''
+//     const seed = mnemonicToSeedSync(mnemonic);
+
+//     if (network === "Ethereum"){
+//         const hdNode = HDNodeWallet.fromSeed(seed);
+//         const ethAccIndex = parseInt(localStorage.getItem("ethAccIndex")|| '1')
+
+//         for (let i = 1; i <= ethAccIndex; i++) {
+//         // Derivation path for Ethereum
+//             const path = `m/44'/60'/${i-1}'/0/0`; 
+  
+//             const wallet = hdNode.derivePath(path);
+//             const privateKey = wallet.privateKey; // Private key in hex format
+//             const address = wallet.address; // Ethereum address (public key));
+
+//             let account:Account =  {
+//                 name:'Wallet '+i,
+//                 publicAddress: address,
+//                 privateAddress:privateKey
+//             }
+//             accounts.concat(account)
+
+//         } 
+//     }             
+//     else if( network === "Solana"){
+//         const solAccIndex = parseInt(localStorage.getItem("solAccIndex")|| '1')
+//         for (let i = 1; i <= solAccIndex ; i++) {
+//             const path = `m/44'/501'/${i-1}'/0'`; // This is the derivation path
+//             const derivedSeed = derivePath(path, seed.toString("hex")).key;
+//             const secret = nacl.sign.keyPair.fromSeed(derivedSeed).secretKey;
+//             console.log("public Key ", Keypair.fromSecretKey(secret).publicKey.toBase58());
+//             console.log("private Key",bs58.encode(Keypair.fromSecretKey(secret).secretKey))
+//             let account:Account =  {
+//                 name:'Wallet '+i,
+//                 publicAddress: Keypair.fromSecretKey(secret).publicKey.toBase58(),
+//                 privateAddress:bs58.encode(Keypair.fromSecretKey(secret).secretKey)
+//             }
+
+//             accounts.concat(account)
+
+//         }
+//     }
+    
+//     return accounts
+
+    
+// }
